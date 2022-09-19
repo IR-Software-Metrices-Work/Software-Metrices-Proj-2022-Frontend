@@ -1,22 +1,15 @@
-# My Personal Web application template for frontend
-
-## Stack
-
-- Vite
-- Vue3
-- Vue Use
-- Vue Router
-- Vue Vuex
-- TailwindCSS
-- Daisy UI
+# Software Metrices Project Frontend
 
 ## Usage
 
-1. create new repository with this template
-2. clone to your local machine
-3. change project name on package.json
-4. `npm install`
-5. `npm run dev`
+1. clone to your local machine
+2. change project name on package.json
+3. `npm install`
+4. `npm run dev`
+
+## Deploy Site
+
+will update if it ready
 
 ---
 
