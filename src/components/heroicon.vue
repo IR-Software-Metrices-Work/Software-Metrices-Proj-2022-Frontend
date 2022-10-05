@@ -3,27 +3,13 @@
     <div class="hero-content text-center">
       <div class="max-w-md">
         <h1 class="text-5xl font-bold">{{header}}</h1>
-        <!-- Searchbar Start -->
-        <input type="text" v-model="input" placeholder="Search..."/>
+        <input type="text" v-model="input" placeholder="Search Repository"/>
+        <select class="select select-bordered max-w-xs">
+          <option disabled selected>Choose Language</option>
+          <option value="Java">Java</option>
+          <option value="C#">C#</option>
+        </select>
         <button class="btn" type="submit">Search</button>
-        <div class="item object" v-for="object in filteredList()" :key="object">
-          <p>{{ object }}</p>
-        </div>
-        <div class="notfound" v-if="input&&!filteredList().length">
-          <p>No result found!</p>
-        </div>
-        <!-- Searchbar End -->
-        <p class="py-6 text-md">
-          This template using a Vue3 + VueUse + Vite + TailwindCSS + DaisyUI
-        </p>
-        <p class="py-6 text-md">
-          {{ now }}
-        </p>
-        <button class="btn btn-ghost">
-          <a class="link link-primary" href="https://daisyui.com/">
-            learn more on daisy ui
-          </a>
-        </button>
       </div>
     </div>
   </div>
@@ -48,7 +34,7 @@ function filteredList() {
 </script>
 
 <style>
-input {
+/* input {
   display: block;
   width: 350px;
   margin: 20px auto;
@@ -75,5 +61,5 @@ input {
 }
 .notfound{
   background-color: tomato;
-}
+} */
 </style>
