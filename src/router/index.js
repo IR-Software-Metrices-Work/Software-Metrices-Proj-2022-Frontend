@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '@/pages/home.page.vue'
 import About from '@/pages/about.page.vue'
+import Repository from '@/pages/repodetail.page.vue'
 
 const routes = [
     {
@@ -12,6 +13,12 @@ const routes = [
         path: '/about',
         name: 'About',
         component: About
+    },
+    {
+        path: '/repo/:owner/:repo',
+        name: 'Repo',
+        component: Repository,
+        props: true
     }
 ]
 

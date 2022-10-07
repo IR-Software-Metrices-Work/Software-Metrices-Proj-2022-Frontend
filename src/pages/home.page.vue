@@ -11,8 +11,9 @@
     </div>
     <div class="lg:mx-80 lg:my-6 lg:px-3">
         <p v-for="item in result">
-            {{item.name}}
+            {{item.owner.login}}/{{item.name}}
             <a class="text-primary" :href=item.html_url target="_blank">link</a>
+            <router-link class="text-secondary" :to='{name:"Repo",params:{owner:item.owner.login,repo:item.name}}' > Details</router-link>
         </p>
     </div>
 </template>
