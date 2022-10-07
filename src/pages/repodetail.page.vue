@@ -65,7 +65,7 @@
                     <tr>
                         <th>11</th>
                         <td>last update</td>
-                        <td>{{dayjs().subtract(createdAt)}}</td>
+                        <td>{{dayjs().diff(updateAt,'day')}} day</td>
                     </tr>
                 </tbody>
             </table>
