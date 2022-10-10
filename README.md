@@ -16,6 +16,7 @@
 
 will update if it ready
 
+Firebase deploymeny: https://software-metric-project-2022.firebaseapp.com/
 ---
 
 Will comeback to update if there anything to update
