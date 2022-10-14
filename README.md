@@ -11,6 +11,7 @@
 
 - searching repo in c# or java
 - can saw essential value for softwware metrice (NOC, DIT, WPC, RFC)
+- use this [api to find loc](https://codetabs.com/count-loc/count-loc-online.html)
 
 ## Deploy Site
 
