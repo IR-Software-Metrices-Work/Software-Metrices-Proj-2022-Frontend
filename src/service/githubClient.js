@@ -1,4 +1,5 @@
 import apiClient from "./axiosClient";
+import apiClient2 from "./apiClient2";
 
 export default {
     searchRepositories: (query,language) => {
@@ -15,5 +16,8 @@ export default {
     },
     getRepository: (owner,repo) => {
         return apiClient.get(`repos/${owner}/${repo}`)
+    },
+    getLOCData: (owner,repo) => {
+        return apiClient2.get(`?github=${owner}/${repo}`)
     }
 }

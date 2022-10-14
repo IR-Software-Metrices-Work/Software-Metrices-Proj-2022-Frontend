@@ -67,6 +67,21 @@
                         <td>last update</td>
                         <td>{{dayjs().diff(updateAt,'day')}} day</td>
                     </tr>
+                    <tr>
+                        <th>12</th>
+                        <td>linesOfCode</td>
+                        <td>{{LOC}}</td>
+                    </tr>
+                     <tr>
+                        <th>13</th>
+                        <td>has MarkDown</td>
+                        <td>{{hasMarkdown}}</td>
+                    </tr>
+                     <tr>
+                        <th>14</th>
+                        <td>has DockerFile</td>
+                        <td>{{hasDockerFile}}</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -98,6 +113,9 @@ const hasProject = ref(false);
 const hasIssues = ref(false);
 const createdAt = ref("");
 const updateAt = ref("");
+const LOC = ref(0);
+const hasMarkdown = ref(false);
+const hasDockerFile = ref(false);
 
 onMounted(async () => {
     const res = await githubClient.getRepository(props.owner, props.repo);
@@ -111,6 +129,23 @@ onMounted(async () => {
     hasIssues.value = res.data.has_issues;
     createdAt.value = res.data.created_at;
     updateAt.value = res.data.updated_at;
+
+    const res2 = await githubClient.getLOCData(props.owner, props.repo);
+   // console.log(res2);
+    for(let i = 0; i < res2.data.length ; i++){
+        if(res2.data[i].language == "Java") {
+            LOC.value = res2.data[i].linesOfCode;
+        }
+        if(res2.data[i].language == "C#") {
+            LOC.value = res2.data[i].linesOfCode;
+        }
+        if(res2.data[i].language == "Markdown"){
+            hasMarkdown.value = true;
+        }
+        if(res2.data[i].language == "Dockerfile"){
+            hasDockerFile.value = true;
+        }
+    }
 
 })
 
