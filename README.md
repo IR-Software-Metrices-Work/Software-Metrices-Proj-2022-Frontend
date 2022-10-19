@@ -1,5 +1,13 @@
 # Software Metrices Project Frontend
 
+## Member 🗳
+
+| ID | Name | Score (5) | Reasons |
+|----|------|-----------|---------|
+|622115039 | Sahachan Tippimwong | 5 | He create this repository, teach team member how to work as team and implement some of metrices details |
+|632115011 | Jeerasak Tarat | 5 | He provide the team with the hosting service and also write some formula that used in metrices |
+|632115016 | Natcha Petchsrikul | 5 | She help me connect the LOC api and also help me with metrices details |
+
 ## Usage
 
 1. clone to your local machine
