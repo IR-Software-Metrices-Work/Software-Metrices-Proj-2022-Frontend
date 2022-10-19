@@ -1,6 +1,6 @@
 <template>
     <div class="lg:mx-80 lg:my-6 lg:px-3">
-        <p class="text-primary text-3xl py-3">{{ owner }}<span>/</span>{{ repo }}</p>
+        <p class="text-primary text-3xl py-3">{{ owner }}<span>/</span>{{ repo }} <span class="text-secondary text-sm">{{projectSize()}}</span></p>
         <p class="text-primary text-xl py-3">Repository Summary</p>
         <div class="overflow-x-auto">
             <table class="table table-zebra w-full">
@@ -15,33 +15,33 @@
                 <tbody>
                     <tr>
                         <th>1</th>
-                        <td>Code Comprehensibility</td>
-                        <td>WIP</td>
-                    </tr>
-                    <tr>
-                        <th>2</th>
                         <td>Document Comprehensibility</td>
                         <td>{{ documentCop() }}</td>
                     </tr>
                     <tr>
-                        <th>3</th>
-                        <td>Code Reusability</td>
-                        <td>WIP</td>
-                    </tr>
-                    <tr>
-                        <th>4</th>
+                        <th>2</th>
                         <td>Build Resuability</td>
                         <td>{{ buildResuablity() }}</td>
                     </tr>
                     <tr>
+                        <th>3</th>
+                        <td>Team Activeness</td>
+                        <td>{{ teamActiveness() }}</td>
+                    </tr>
+                    <tr>
+                        <th>4</th>
+                        <td>Code Comprehensibility</td>
+                        <td>WIP</td>
+                    </tr>
+                    <tr>
                         <th>5</th>
-                        <td>Test Quality</td>
+                        <td>Code Reusability</td>
                         <td>WIP</td>
                     </tr>
                     <tr>
                         <th>6</th>
-                        <td>Team Activeness</td>
-                        <td>{{ teamActiveness() }}</td>
+                        <td>Test Quality</td>
+                        <td>WIP</td>
                     </tr>
                 </tbody>
             </table>
@@ -170,6 +170,9 @@ const updateAt = ref("");
 const LOC = ref(0);
 const hasMarkdown = ref(false);
 const hasDockerFile = ref(false);
+const hasXML = ref(false);
+const hasGradle = ref(false);
+const hasJson = ref(false);
 
 onMounted(async () => {
     const res = await githubClient.getRepository(props.owner, props.repo);
@@ -198,6 +201,15 @@ onMounted(async () => {
         if (res2.data[i].language == "Dockerfile") {
             hasDockerFile.value = true;
         }
+        if(res2.data[i].language == "XML"){
+            hasXML.value = true;
+        }
+        if(res2.data[i].language == "Gradle"){
+            hasGradle.value = true;
+        }
+        if(res2.data[i].language == "JSON"){
+            hasJson.value = true;
+        }
     }
 })
 
@@ -216,16 +228,50 @@ const teamActiveness = () => {
 }
 
 const buildResuablity = () => {
-    if (hasDockerFile.value) {
+    if (hasDockerFile.value && (hasXML.value || hasGradle.value || hasJson.value) ) {
         return "High";
+    }
+    if(hasDockerFile.value){
+        return "Medium";
+    }
+    if(hasXML.value || hasGradle.value || hasJson.value){
+        return "Medium";
     }
     return "Low";
 }
 
 const documentCop = () => {
-    if (hasMarkdown.value) {
+    if (hasMarkdown.value && hasWiki.value) {
         return "High";
     }
     return "Low";
 }
+
+const projectSize = () => {
+    if (size <= 1500) {
+        return "Very Small Project";
+    } else if (size > 1500 && size <= 5500) {
+        return "Small Project";
+    } else if (size > 5500 && size <= 25000) {
+        return "Medium Project";
+    } else if (size > 25000 && size <= 55000) {
+        return "Large Project";
+    } else if (size > 55000 && size <= 100000) {
+        return "Very Large Project";
+    } 
+    return "Huge Project";
+}
+
+const cocomo = () => {
+}
+
+const basicModel = () => {
+
+}
+
+const intermediateModel = () => {
+
+}
+
+
 </script>
