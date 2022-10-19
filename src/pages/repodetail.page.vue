@@ -1,6 +1,7 @@
 <template>
     <div class="lg:mx-80 lg:my-6 lg:px-3">
         <p class="text-primary text-3xl py-3">{{ owner }}<span>/</span>{{ repo }} <span class="text-secondary text-sm">{{projectSize()}}</span></p>
+        <p class="hidden">{{cocomo()}}</p>
         <p class="text-primary text-xl py-3">Repository Summary</p>
         <div class="overflow-x-auto">
             <table class="table table-zebra w-full">
@@ -31,17 +32,17 @@
                     <tr>
                         <th>4</th>
                         <td>Code Comprehensibility</td>
-                        <td>WIP</td>
+                        <td>{{ codePreMeasure() }}</td>
                     </tr>
                     <tr>
                         <th>5</th>
                         <td>Code Reusability</td>
-                        <td>WIP</td>
+                        <td>{{ codeReuseMeasure() }}</td>
                     </tr>
                     <tr>
                         <th>6</th>
                         <td>Test Quality</td>
-                        <td>WIP</td>
+                        <td>{{ testQualityMeasure() }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -173,6 +174,7 @@ const hasDockerFile = ref(false);
 const hasXML = ref(false);
 const hasGradle = ref(false);
 const hasJson = ref(false);
+const effort = ref(0);
 
 onMounted(async () => {
     const res = await githubClient.getRepository(props.owner, props.repo);
@@ -244,34 +246,169 @@ const documentCop = () => {
     if (hasMarkdown.value && hasWiki.value) {
         return "High";
     }
+    if(hasMarkdown.value){
+        return "Medium";
+    }
     return "Low";
 }
 
 const projectSize = () => {
-    if (size <= 1500) {
+    let s = size.value
+    if (s <= 1500) {
         return "Very Small Project";
-    } else if (size > 1500 && size <= 5500) {
+    } else if (s > 1500 && s <= 5500) {
         return "Small Project";
-    } else if (size > 5500 && size <= 25000) {
+    } else if (s > 5500 && s <= 25000) {
         return "Medium Project";
-    } else if (size > 25000 && size <= 55000) {
+    } else if (s > 25000 && s <= 55000) {
         return "Large Project";
-    } else if (size > 55000 && size <= 100000) {
+    } else if (s > 55000 && s <= 100000) {
         return "Very Large Project";
     } 
     return "Huge Project";
 }
 
 const cocomo = () => {
+    let eff = 0;
+    if(LOC.value === 0) {
+        LOC.value = 10000;
+    }
+    if(size.value <= 25000) {
+        effort.value = 2.4 * Math.pow(LOC.value/1000, 1.05);
+    } else {
+        effort.value = 3.0 * Math.pow(LOC.value/1000, 1.12);
+    }
+    eff = effort.value;
+    return eff.toFixed(2);
 }
 
-const basicModel = () => {
-
+const codePreMeasure = () => {
+    let pSize = projectSize();
+    let eff = effort.value;
+    eff = eff.toFixed(2);
+    if(pSize === "Very Small Project") {
+        if(eff >= 0 && eff <= 100) {
+            return "Easy To Understand";
+        } else {
+            return "Hard To Understand";
+        }
+    } else if(pSize === "Small Project") {
+        if(eff > 100 && eff <= 350) {
+            return "Easy To Understand";
+        } else {
+            return "Hard To Understand";
+        }
+    } else if(pSize === "Medium Project") {
+        if(eff > 350 && eff <= 750) {
+            return "Easy To Understand";
+        } else {
+            return "Hard To Understand";
+        }
+    } else if(pSize === "Large Project") {
+        if(eff > 750 && eff <= 1250) {
+            return "Easy To Understand";
+        } else {
+            return "Hard To Understand";
+        }
+    } else if(pSize === "Very Large Project") {
+        if(eff > 1250 && eff <= 1650) {
+            return "Easy To Understand";
+        } else {
+            return "Hard To Understand";
+        }
+    } else if(pSize === "Huge Project") {
+        if(eff > 1650 && eff <= 3000) {
+            return "Easy To Understand";
+        } else {
+            return "Hard To Understand";
+        }
+    }
 }
 
-const intermediateModel = () => {
-
+const codeReuseMeasure = () => {
+    let pSize = projectSize();
+    let eff = effort.value;
+    eff = eff.toFixed(2);
+    if(pSize === "Very Small Project") {
+        if(eff >= 0 && eff <= 100) {
+            return "Easy to Reuse";
+        } else {
+            return "Hard To Reuse";
+        }
+    } else if(pSize === "Small Project") {
+        if(eff > 100 && eff <= 350) {
+            return "Easy to Reuse";
+        } else {
+            return "Hard To Reuse";
+        }
+    } else if(pSize === "Medium Project") {
+        if(eff > 350 && eff <= 750) {
+            return "Easy to Reuse";
+        } else {
+            return "Hard To Reuse";
+        }
+    } else if(pSize === "Large Project") {
+        if(eff > 750 && eff <= 1250) {
+            return "Easy to Reuse";
+        } else {
+            return "Hard To Reuse";
+        }
+    } else if(pSize === "Very Large Project") {
+        if(eff > 1250 && eff <= 1650) {
+            return "Easy to Reuse";
+        } else {
+            return "Hard To Reuse";
+        }
+    } else if(pSize === "Huge Project") {
+        if(eff > 1650 && eff <= 3000) {
+            return "Easy to Reuse";
+        } else {
+            return "Hard To Reuse";
+        }
+    }
 }
 
+const testQualityMeasure = () => {
+    let pSize = projectSize();
+    let eff = effort.value;
+    eff = eff.toFixed(2);
+    if(pSize === "Very Small Project") {
+        if(eff >= 0 && eff <= 100) {
+            return "Easy to Test";
+        } else {
+            return "Hard to Test";
+        }
+    } else if(pSize === "Small Project") {
+        if(eff > 100 && eff <= 350) {
+            return "Easy to Test";
+        } else {
+            return "Hard to Test";
+        }
+    } else if(pSize === "Medium Project") {
+        if(eff > 350 && eff <= 750) {
+            return "Easy to Test";
+        } else {
+            return "Hard to Test";
+        }
+    } else if(pSize === "Large Project") {
+        if(eff > 750 && eff <= 1250) {
+            return "Easy to Test";
+        } else {
+            return "Hard to Test";
+        }
+    } else if(pSize === "Very Large Project") {
+        if(eff > 1250 && eff <= 1650) {
+            return "Easy to Test";
+        } else {
+            return "Hard to Test";
+        }
+    } else if(pSize === "Huge Project") {
+        if(eff > 1650 && eff <= 3000) {
+            return "Easy to Test";
+        } else {
+            return "Hard to Test";
+        }
+    }
+}
 
 </script>
