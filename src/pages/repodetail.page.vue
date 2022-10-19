@@ -1,90 +1,144 @@
 <template>
     <div class="lg:mx-80 lg:my-6 lg:px-3">
         <p class="text-primary text-3xl py-3">{{ owner }}<span>/</span>{{ repo }}</p>
+        <p class="text-primary text-xl py-3">Repository Summary</p>
         <div class="overflow-x-auto">
-            <table class="table w-full">
+            <table class="table table-zebra w-full">
                 <!-- head -->
                 <thead>
                     <tr>
                         <th></th>
                         <th>Topic</th>
-                        <th>Value</th>
+                        <th>Result</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <th>1</th>
-                        <td>repository name</td>
-                        <td>{{repoName}}</td>
+                        <td>Code Comprehensibility</td>
+                        <td>WIP</td>
                     </tr>
                     <tr>
                         <th>2</th>
-                        <td>repo Description</td>
-                        <td>{{repoDescription}}</td>
+                        <td>Document Comprehensibility</td>
+                        <td>{{ documentCop() }}</td>
                     </tr>
                     <tr>
                         <th>3</th>
-                        <td>Star</td>
-                        <td>{{repoStar}}</td>
+                        <td>Code Reusability</td>
+                        <td>WIP</td>
                     </tr>
                     <tr>
                         <th>4</th>
-                        <td>is repository archived</td>
-                        <td>{{isArchive}}</td>
+                        <td>Build Resuability</td>
+                        <td>{{ buildResuablity() }}</td>
                     </tr>
                     <tr>
                         <th>5</th>
-                        <td>repository size</td>
-                        <td>{{size}}</td>
+                        <td>Test Quality</td>
+                        <td>WIP</td>
                     </tr>
                     <tr>
                         <th>6</th>
-                        <td>has wiki</td>
-                        <td>{{hasWiki}}</td>
-                    </tr>
-                    <tr>
-                        <th>7</th>
-                        <td>has project</td>
-                        <td>{{hasProject}}</td>
-                    </tr>
-                    <tr>
-                        <th>8</th>
-                        <td>has issues</td>
-                        <td>{{hasIssues}}</td>
-                    </tr>
-                    <tr>
-                        <th>9</th>
-                        <td>create At</td>
-                        <td>{{dayjs(createdAt).format("DD MMMM YYYY")}}</td>
-                    </tr>
-                    <tr>
-                        <th>10</th>
-                        <td>update At</td>
-                        <td>{{dayjs(updateAt).format("DD MMMM YYYY")}}</td>
-                    </tr>
-                    <tr>
-                        <th>11</th>
-                        <td>last update</td>
-                        <td>{{dayjs().diff(updateAt,'day')}} day</td>
-                    </tr>
-                    <tr>
-                        <th>12</th>
-                        <td>linesOfCode</td>
-                        <td>{{LOC}}</td>
-                    </tr>
-                     <tr>
-                        <th>13</th>
-                        <td>has MarkDown</td>
-                        <td>{{hasMarkdown}}</td>
-                    </tr>
-                     <tr>
-                        <th>14</th>
-                        <td>has DockerFile</td>
-                        <td>{{hasDockerFile}}</td>
+                        <td>Team Activeness</td>
+                        <td>{{ teamActiveness() }}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
+        <div class="collapse">
+            <input type="checkbox" />
+            <div class="collapse-title text-xl font-medium">
+                <span class="text-primary">Show Repository Details</span>
+            </div>
+            <div class="collapse-content">
+                <div class="overflow-x-auto">
+                    <table class="table w-full">
+                        <!-- head -->
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Topic</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>1</th>
+                                <td>repository name</td>
+                                <td>{{repoName}}</td>
+                            </tr>
+                            <tr>
+                                <th>2</th>
+                                <td>repo Description</td>
+                                <td>{{repoDescription}}</td>
+                            </tr>
+                            <tr>
+                                <th>3</th>
+                                <td>Star</td>
+                                <td>{{repoStar}}</td>
+                            </tr>
+                            <tr>
+                                <th>4</th>
+                                <td>is repository archived</td>
+                                <td>{{isArchive}}</td>
+                            </tr>
+                            <tr>
+                                <th>5</th>
+                                <td>repository size</td>
+                                <td>{{size}}</td>
+                            </tr>
+                            <tr>
+                                <th>6</th>
+                                <td>has wiki</td>
+                                <td>{{hasWiki}}</td>
+                            </tr>
+                            <tr>
+                                <th>7</th>
+                                <td>has project</td>
+                                <td>{{hasProject}}</td>
+                            </tr>
+                            <tr>
+                                <th>8</th>
+                                <td>has issues</td>
+                                <td>{{hasIssues}}</td>
+                            </tr>
+                            <tr>
+                                <th>9</th>
+                                <td>create At</td>
+                                <td>{{dayjs(createdAt).format("DD MMMM YYYY")}}</td>
+                            </tr>
+                            <tr>
+                                <th>10</th>
+                                <td>update At</td>
+                                <td>{{dayjs(updateAt).format("DD MMMM YYYY")}}</td>
+                            </tr>
+                            <tr>
+                                <th>11</th>
+                                <td>last update</td>
+                                <td>{{dayjs().diff(updateAt,'day')}} day</td>
+                            </tr>
+                            <tr>
+                                <th>12</th>
+                                <td>linesOfCode</td>
+                                <td>{{LOC}}</td>
+                            </tr>
+                            <tr>
+                                <th>13</th>
+                                <td>has MarkDown</td>
+                                <td>{{hasMarkdown}}</td>
+                            </tr>
+                            <tr>
+                                <th>14</th>
+                                <td>has DockerFile</td>
+                                <td>{{hasDockerFile}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
     </div>
 </template>
 
@@ -131,22 +185,47 @@ onMounted(async () => {
     updateAt.value = res.data.updated_at;
 
     const res2 = await githubClient.getLOCData(props.owner, props.repo);
-   // console.log(res2);
-    for(let i = 0; i < res2.data.length ; i++){
-        if(res2.data[i].language == "Java") {
+    for (let i = 0; i < res2.data.length; i++) {
+        if (res2.data[i].language == "Java") {
             LOC.value = res2.data[i].linesOfCode;
         }
-        if(res2.data[i].language == "C#") {
+        if (res2.data[i].language == "C#") {
             LOC.value = res2.data[i].linesOfCode;
         }
-        if(res2.data[i].language == "Markdown"){
+        if (res2.data[i].language == "Markdown") {
             hasMarkdown.value = true;
         }
-        if(res2.data[i].language == "Dockerfile"){
+        if (res2.data[i].language == "Dockerfile") {
             hasDockerFile.value = true;
         }
     }
-
 })
 
+const teamActiveness = () => {
+    let dayUpdate = dayjs().diff(updateAt.value, 'day');
+    if (dayUpdate <= 4) {
+        return "Very Active";
+    }
+    if (dayUpdate > 4 && dayUpdate <= 10) {
+        return "Active";
+    }
+    if (dayUpdate > 10 && dayUpdate <= 20) {
+        return "Not Active";
+    }
+    return "Abandon";
+}
+
+const buildResuablity = () => {
+    if (hasDockerFile.value) {
+        return "High";
+    }
+    return "Low";
+}
+
+const documentCop = () => {
+    if (hasMarkdown.value) {
+        return "High";
+    }
+    return "Low";
+}
 </script>
