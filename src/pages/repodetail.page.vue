@@ -47,10 +47,10 @@
                 </tbody>
             </table>
         </div>
-        <div class="collapse">
+        <div class="collapse border my-3 rounded-lg">
             <input type="checkbox" />
             <div class="collapse-title text-xl font-medium">
-                <span class="text-primary">Show Repository Details</span>
+                <span class="text-primary">Document Comprehensibility</span>
             </div>
             <div class="collapse-content">
                 <div class="overflow-x-auto">
@@ -66,73 +66,124 @@
                         <tbody>
                             <tr>
                                 <th>1</th>
-                                <td>repository name</td>
-                                <td>{{repoName}}</td>
-                            </tr>
-                            <tr>
-                                <th>2</th>
-                                <td>repo Description</td>
-                                <td>{{repoDescription}}</td>
-                            </tr>
-                            <tr>
-                                <th>3</th>
-                                <td>Star</td>
-                                <td>{{repoStar}}</td>
-                            </tr>
-                            <tr>
-                                <th>4</th>
-                                <td>is repository archived</td>
-                                <td>{{isArchive}}</td>
-                            </tr>
-                            <tr>
-                                <th>5</th>
-                                <td>repository size</td>
-                                <td>{{size}}</td>
-                            </tr>
-                            <tr>
-                                <th>6</th>
-                                <td>has wiki</td>
+                                <td>has Wiki</td>
                                 <td>{{hasWiki}}</td>
                             </tr>
                             <tr>
-                                <th>7</th>
-                                <td>has project</td>
-                                <td>{{hasProject}}</td>
+                                <th>2</th>
+                                <td>has MarkDown</td>
+                                <td>{{hasMarkdown}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="collapse border my-3 rounded-lg">
+            <input type="checkbox" />
+            <div class="collapse-title text-xl font-medium">
+                <span class="text-primary">Build Reusability</span>
+            </div>
+            <div class="collapse-content">
+                <div class="overflow-x-auto">
+                    <table class="table w-full">
+                        <!-- head -->
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Topic</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>1</th>
+                                <td>has Dockerfile</td>
+                                <td>{{hasDockerFile}}</td>
                             </tr>
                             <tr>
-                                <th>8</th>
-                                <td>has issues</td>
-                                <td>{{hasIssues}}</td>
+                                <th>2</th>
+                                <td>has POM.xml (Java)</td>
+                                <td>{{hasXML}}</td>
                             </tr>
                             <tr>
-                                <th>9</th>
+                                <th>3</th>
+                                <td>has Gradle (Java)</td>
+                                <td>{{hasGradle}}</td>
+                            </tr>
+                            <tr>
+                                <th>4</th>
+                                <td>has AppSetting.json (C#)</td>
+                                <td>{{hasJson}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="collapse border my-3 rounded-lg">
+            <input type="checkbox" />
+            <div class="collapse-title text-xl font-medium">
+                <span class="text-primary">Team Activeness</span>
+            </div>
+            <div class="collapse-content">
+                <div class="overflow-x-auto">
+                    <table class="table w-full">
+                        <!-- head -->
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Topic</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>1</th>
                                 <td>create At</td>
                                 <td>{{dayjs(createdAt).format("DD MMMM YYYY")}}</td>
                             </tr>
                             <tr>
-                                <th>10</th>
+                                <th>2</th>
                                 <td>update At</td>
                                 <td>{{dayjs(updateAt).format("DD MMMM YYYY")}}</td>
                             </tr>
                             <tr>
-                                <th>11</th>
+                                <th>3</th>
                                 <td>last update</td>
                                 <td>{{dayjs().diff(updateAt,'day')}} day</td>
                             </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="collapse border my-3 rounded-lg">
+            <input type="checkbox" />
+            <div class="collapse-title text-xl font-medium">
+                <span class="text-primary">Code, Code Reuse and Test Comprehensibility</span>
+            </div>
+            <div class="collapse-content">
+                <div class="overflow-x-auto">
+                    <table class="table w-full">
+                        <!-- head -->
+                        <thead>
                             <tr>
-                                <th>12</th>
+                                <th></th>
+                                <th>Topic</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>1</th>
                                 <td>linesOfCode</td>
                                 <td>{{LOC}}</td>
                             </tr>
                             <tr>
-                                <th>13</th>
-                                <td>has MarkDown</td>
-                                <td>{{hasMarkdown}}</td>
-                            </tr>
-                            <tr>
-                                <th>14</th>
-                                <td>has DockerFile</td>
-                                <td>{{hasDockerFile}}</td>
+                                <th>2</th>
+                                <td>Effort</td>
+                                <td>{{effort.toFixed(2)}}</td>
                             </tr>
                         </tbody>
                     </table>
